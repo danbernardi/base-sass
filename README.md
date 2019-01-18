@@ -1,6 +1,5 @@
 # base-sass
 Base sass files for all new projects
 
-Requires the following postcss plugins:  
-https://github.com/peterramsing/lost  
-https://github.com/postcss/autoprefixer  
+- Import `core.scss` into the root of your project.
+- Import `_sass-includes.scss` into individual components.

@@ -1,29 +1,14 @@
-.list--inline li {
-  display: inline-block;
-}
+.list--aside {
+  border-left: 0.2rem solid $dark;
+  padding-left: 3rem;
 
-.list--block li {
-  display: block;
-}
-
-.list--hash {
-  li {
-    display: inline-block;
-    margin-right: 1em;
-    padding-right: 1em;
-    position: relative;
-
-    &:after {
-      content: '|';
-      position: absolute;
-      right: 0;
-    }
+  > li {
+    @include font(bold);
+    @include font-size(b2);
+    margin-bottom: 3rem;
 
     &:last-of-type {
-      margin-right: 0;
-      padding-right: 0;
-
-      &:after { display: none; }
+      margin-bottom: 0;
     }
   }
 }

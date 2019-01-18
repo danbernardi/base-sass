@@ -1,62 +1,40 @@
-// grid config
-@lost gutter 3rem;
-
-%container {
-  max-width: $content-width;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-%page-margins {
-  padding-left: 6rem;
-  padding-right: 6rem;
-  // media queries
-  @include breakpoint($mobile-lg) {
-    padding-left: 4rem;
-    padding-right: 4rem;
-  }
-  // @include breakpoint($mobile-xsm) {
-  //   padding-left: 2rem;
-  //   padding-right: 2rem;
-  // }
-}
-
-// base grid styles
+// basic row element,
+// constrains by max width,
+// adds margin to left and right
 .row {
   @extend %container;
   @extend %page-margins;
   @extend %clearfix;
+  width: 100%;
   position: relative;
   clear: both;
-  width: 100%;
+  float: none;
 }
 
+// empty grid element,
+// combine with col-# to use as horizontal grid spacer
+.gridspacer {
+  height: 0.1rem;
+}
+
+// loop through $desktop-columns and define grid classes
 @for $i from 1 through $columns {
-  .col-#{$i} { lost-column: $i/$columns; }
+  .col--#{$i} {
+    width: calc(100% * #{$i} / #{$columns} - #{$gutter} * (1 - #{$i} / #{$columns}));
+    float: left;
+    margin-right: #{$gutter};
+
+    &:last-of-type {
+      margin-right: 0;
+    }
+  }
 }
 
-@for $i from 1 through $columns {
-  .col-#{$i}--dlg  { @include breakpoint($desktop-lg) { lost-column: $i/$columns; } }
-  .col-#{$i}--dsm  { @include breakpoint($desktop-sm) { lost-column: $i/$columns; } }
-  .col-#{$i}--tlg  { @include breakpoint($tablet-lg) { lost-column: $i/$columns; } }
-  .col-#{$i}--tmd  { @include breakpoint($tablet-md) { lost-column: $i/$columns; } }
-  .col-#{$i}--tsm  { @include breakpoint($tablet-sm) { lost-column: $i/$columns; } }
-  .col-#{$i}--mlg  { @include breakpoint($mobile-lg) { lost-column: $i/$columns; } }
-  .col-#{$i}--msm  { @include breakpoint($mobile-sm) { lost-column: $i/$columns; } }
-  .col-#{$i}--mxsm  { @include breakpoint($mobile-xsm) { lost-column: $i/$columns; } }
-}
+// force element to be last item in grid, removes right gutter
+.col--last { margin-right: 0; }
 
-.col-last:nth-child(1n) { margin-right: 0; }
-.col-last--dlg:nth-child(1n) { @include breakpoint($desktop-lg) { margin-right: 0; } }
-.col-last--dsm:nth-child(1n) { @include breakpoint($desktop-sm) { margin-right: 0; } }
-.col-last--tlg:nth-child(1n) { @include breakpoint($tablet-lg) { margin-right: 0; } }
-.col-last--tmd:nth-child(1n) { @include breakpoint($tablet-md) { margin-right: 0; } }
-.col-last--tsm:nth-child(1n) { @include breakpoint($tablet-sm) { margin-right: 0; } }
-.col-last--mlg:nth-child(1n) { @include breakpoint($mobile-lg) { margin-right: 0; } }
-.col-last--msm:nth-child(1n) { @include breakpoint($mobile-sm) { margin-right: 0; } }
-.col-last--mxsm:nth-child(1n) { @include breakpoint($mobile-xsm) { margin-right: 0; } }
-
-.col-center:nth-child(1n) {
+// center element inside of it's parent, combine with .col-# or max-width
+.col--center {
   margin-left: auto;
   margin-right: auto;
   float: none;

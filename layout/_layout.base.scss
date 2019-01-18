@@ -1,41 +1,27 @@
-.layout--left {
-  float: left;
-  border: 0;
+.disable-scroll {
+  overflow: hidden;
 }
 
+// align content left for box model layouts
+.layout--left {
+  float: left;
+}
+
+// align content left for box model layouts
 .layout--right {
   float: right;
 }
 
-.layout--top {
-  vertical-align: top;
-}
-
+// force position relative, used to constrain absolute children
 .layout--relative {
   position: relative;
 }
 
-.layout--fullheight {
-  height: 100vh;
-  overflow-y: scroll;
+.layout--block {
+  display: block;
 }
 
-.layout--flex {
-  display: flex;
-  align-items: center;
-}
-
-.list--inline {
-  li {
-    display: inline-block;
-  }
-}
-
-ol {
-  list-style-type: decimal;
-  margin-left: 1.6rem;
-}
-
+// clearfix class, % defined in extends
 .cf {
   @extend %clearfix;
 }
